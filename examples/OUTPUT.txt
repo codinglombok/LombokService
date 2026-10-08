@@ -1,0 +1,15 @@
+[Unit]
+Description=My daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/mydaemon --config "/etc/my daemon.toml"
+User=svc
+Environment="MODE=prod"
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

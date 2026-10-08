@@ -1,0 +1,21 @@
+# Map LombokService v0.1.0
+
+## 1. Posisi dependensi
+
+Tingkat L0; tanpa dependensi Lombok wajib.
+
+## 2. Contoh dependen di ekosistem
+
+LombokDNSProxy (aplikasi) dapat memakai library ini menggantikan modul internalnya; status integrasi: rencana.
+
+## 3. Bergantung pada
+
+Tidak ada.
+
+## 4. Jalur kontrak normatif
+
+`docs/SPEC_LombokService_v0.1.0.md` dan `vectors/lombokservice-vectors-v1.json`.
+
+## 5. Peta folder
+
+`typescript/`, `python/`, `vectors/`, `scripts/`, `docs/`.
