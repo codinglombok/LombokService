@@ -12,11 +12,11 @@ const specs: unknown[] = [
   { name: "ampersand", description: "A & B <c> d", exec: ["/bin/x", "a&b", "<tag>", "it's"], env: { K: "v&<>" } },
   { name: "quotes", exec: ["/bin/x", "it's a 'test'", "plain", "tab\there"] },
   { name: "windows-path", exec: ["C:\\Program Files\\App\\app.exe", "--dir", "C:\\Data Dir\\", "--q", '"x"', "\\\\server\\share"], user: "NT AUTHORITY\\LocalService" },
-  { name: "unicode", description: "Layanan \u00e9\u4e2d", exec: ["/bin/x", "\u00e9\ud83d\ude00"], env: { U: "\u00e9" } },
+  { name: "unicode", description: "Service \u00e9\u4e2d", exec: ["/bin/x", "\u00e9\ud83d\ude00"], env: { U: "\u00e9" } },
   { name: "a", exec: ["x"] },
   { name: "a".repeat(63), exec: ["/x"] },
   { name: "env-order", exec: ["/x"], env: { b: "1", B: "2", a: "3", _z: "4", A1: "5" } },
-  // tidak sah
+  // invalid
   { name: "A", exec: ["/x"] }, { name: "1a", exec: ["/x"] }, { name: "a b", exec: ["/x"] }, { name: "a".repeat(64), exec: ["/x"] }, { name: "", exec: ["/x"] },
   { name: "ok", exec: [] }, { name: "ok", exec: [""] }, { name: "ok", exec: ["/x", "a\nb"] }, { name: "ok", exec: ["/x", "a\u0000b"] }, { name: "ok" },
   { name: "ok", exec: ["/x"], description: "" }, { name: "ok", exec: ["/x"], description: "a\nb" }, { name: "ok", exec: ["/x"], user: "" },

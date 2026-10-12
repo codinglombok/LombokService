@@ -152,7 +152,7 @@ function openwrt(n: Norm): string {
   return l.join("\n") + "\n";
 }
 
-/** Hasilkan teks definisi layanan untuk target; melempar RangeError bila spesifikasi tidak sah atau tidak didukung target. */
+/** Render the service definition text for a target; throws RangeError if the spec is invalid or unsupported by the target. */
 export function render(target: Target, spec: ServiceSpec): string {
   if (!TARGETS.includes(target)) bad("invalid target");
   const n = normalize(spec);

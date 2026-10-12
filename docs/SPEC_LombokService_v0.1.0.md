@@ -2,36 +2,36 @@
 
 This document is the normative cross-language contract. Every language port MUST produce byte-identical output for all specified inputs. Deviations from this specification are bugs.
 
-Kata MUST, SHOULD, dan MAY dibaca sesuai RFC 2119. Tinjauan terakhir: 2026-10-07.
+The keywords MUST, SHOULD and MAY are to be read as in RFC 2119. Last reviewed: 2026-10-07.
 
-## 0. Standar acuan
+## 0. Reference standards
 
-Library ini mendefinisikan kontraknya sendiri; tidak ada standar eksternal normatif kecuali yang disebut pada bagian terkait.
+This library defines its own contract; there is no normative external standard except those named in the relevant sections.
 
-## 1. Vector
+## 1. Vectors
 
-| Berkas | Kasus | SHA-256 |
+| File | Cases | SHA-256 |
 |---|---|---|
-| `vectors/lombokservice-vectors-v1.json` | 165 | `74675839ab91dc8adfd560a270804830854ae2df777790f14bb277302e4da3ab` |
+| `vectors/lombokservice-vectors-v1.json` | 165 | `e347da95c2b103e51260a45febee99c420638e1543a6776fb45fb17052de32b3` |
 
-## 2. Kontrak
+## 2. Contract
 
-1. name cocok ^[a-z][a-z0-9_-]{0,62}$. exec tidak kosong; elemen berupa string tanpa karakter kontrol (U+0000-U+001F, U+007F); hanya elemen pertama tidak boleh kosong. description, workingDir, user tidak kosong dan tanpa karakter kontrol. Kunci env cocok ^[A-Za-z_][A-Za-z0-9_]*$; nilai tanpa karakter kontrol. restart default always; restartDelaySec bilangan bulat 0..3600 default 5; network default false.
-2. Variabel lingkungan diurutkan menurut kunci (code point).
-3. systemd: bagian [Unit], [Service], [Install]; '%' pada nilai menjadi '%%'; argumen ExecStart yang tidak seluruhnya dari [A-Za-z0-9_@+=:,./-] (setelah '%' dan '$' digandakan) dibungkus tanda kutip ganda dengan '\\' dan '"' di-escape; Restart=no untuk never; RestartSec hanya bila restart bukan never; After/Wants network-online.target hanya bila network benar.
-4. launchd: plist XML dengan indentasi tab; '&', '<', '>' di-escape; RunAtLoad benar; KeepAlive benar untuk always, dict SuccessfulExit=false untuk on-failure, tidak ada untuk never; ThrottleInterval bila restart bukan never. description tidak dipakai.
-5. windows: env dan workingDir ditolak; tanda kutip ganda pada description atau user ditolak. Baris `sc.exe create` dengan binPath berupa baris perintah (argumen dikutip menurut aturan CommandLineToArgvW) yang dikutip lagi sebagai satu argumen; `obj=` bila user; baris `sc.exe failure ... actions= restart/<detik*1000>` bila restart bukan never.
-6. openwrt: workingDir dan restart on-failure ditolak; skrip rc.common dengan procd; argumen dikutip kutip-tunggal POSIX kecuali seluruhnya dari [A-Za-z0-9_@%+=:,./-]; respawn 3600 <delay> 0 hanya untuk always.
-7. Setiap keluaran diakhiri LF. Spesifikasi atau target tidak sah memicu RangeError/ValueError.
+1. name matches ^[a-z][a-z0-9_-]{0,62}$. exec is non-empty; its elements are strings without control characters (U+0000-U+001F, U+007F); only the first element MUST be non-empty. description, workingDir and user are non-empty without control characters. env keys match ^[A-Za-z_][A-Za-z0-9_]*$; values contain no control characters. restart defaults to always; restartDelaySec is an integer 0..3600 and defaults to 5; network defaults to false.
+2. Environment variables are sorted by key (code point order).
+3. systemd: sections [Unit], [Service], [Install]; '%' in values becomes '%%'; ExecStart arguments that are not entirely from [A-Za-z0-9_@+=:,./-] (after doubling '%' and '$') are wrapped in double quotes with '\\' and '"' escaped; Restart=no for never; RestartSec only when restart is not never; After/Wants network-online.target only when network is true.
+4. launchd: XML plist with tab indentation; '&', '<', '>' escaped; RunAtLoad true; KeepAlive true for always, a SuccessfulExit=false dict for on-failure, absent for never; ThrottleInterval when restart is not never. description is not used.
+5. windows: env and workingDir are rejected; a double quote in description or user is rejected. An `sc.exe create` line whose binPath is a command line (arguments quoted by the CommandLineToArgvW rules) quoted again as a single argument; `obj=` when user is set; an `sc.exe failure ... actions= restart/<seconds*1000>` line when restart is not never.
+6. openwrt: workingDir and restart on-failure are rejected; an rc.common script using procd; arguments are POSIX single-quoted unless entirely from [A-Za-z0-9_@%+=:,./-]; respawn 3600 <delay> 0 only for always.
+7. Every output ends with LF. An invalid specification or target raises RangeError/ValueError.
 
-## 3. Representasi lintas bahasa
+## 3. Cross-language representation
 
-Indeks dan panjang string dihitung per code point; angka floating point memakai IEEE 754 double dengan urutan operasi seperti tertulis; bilangan bulat besar tidak boleh kehilangan presisi.
+String indexes and lengths are counted in code points; floating-point numbers use IEEE 754 doubles with the order of operations as written; large integers MUST NOT lose precision.
 
 ## 4. Non-goals
 
-Memasang, memulai, atau memeriksa layanan; hak akses berkas; skrip SysV lama dan FreeBSD rc.d (BELUM); bidang lanjutan unit systemd (sandboxing, ketergantungan khusus).
+Installing, starting, or inspecting services; file permissions; legacy SysV scripts and FreeBSD rc.d (NOT YET); advanced systemd unit fields (sandboxing, custom dependencies).
 
-## 5. Riwayat perubahan kontrak
+## 5. Contract change history
 
-- 0.1.0: kontrak awal.
+- 0.1.0: initial contract.

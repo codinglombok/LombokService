@@ -3,5 +3,5 @@
 ## [0.1.0] - 2026-10-07
 
 ### Added
-- Rilis awal: referensi TypeScript dan port Python.
-- Vector bersama `lombokservice-vectors-v1.json` (165 kasus) yang dieksekusi oleh runner di kedua port.
+- Initial release: TypeScript reference and Python port.
+- Shared vector file `lombokservice-vectors-v1.json` (165 cases) executed by a runner in both ports.

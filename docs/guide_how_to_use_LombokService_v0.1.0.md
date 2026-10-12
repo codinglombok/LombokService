@@ -1,16 +1,16 @@
-# Panduan Pemakaian LombokService
+# Usage Guide LombokService
 
-## 1. Instalasi
+## 1. Installation
 
-Setelah rilis: `npm install lombokservice` atau `pip install lombokservice`. Sebelum rilis, salin folder `typescript/src` atau `python/src/lombokservice` (tanpa dependensi).
+After release: `npm install lombokservice` or `pip install lombokservice`. Before release, copy the `typescript/src` folder or `python/src/lombokservice` (no dependencies).
 
-## 2. Konsep dasar
+## 2. Basic concepts
 
-Satu ServiceSpec menggambarkan layanan: nama, perintah (daftar argumen), pengguna, direktori kerja, variabel lingkungan, kebijakan restart. render(target, spec) menghasilkan teks untuk systemd, launchd, Windows, atau OpenWrt. Bidang yang tidak dapat dinyatakan pada target ditolak dengan galat.
+One ServiceSpec describes a service: name, command (list of arguments), user, working directory, environment variables, restart policy. render(target, spec) produces text for systemd, launchd, Windows, or OpenWrt. Fields that a target cannot express are rejected with an error.
 
-## 3. Contoh
+## 3. Examples
 
-Berkas `examples/example.ts` dan `examples/example.py` menghasilkan keluaran berikut (TypeScript; Python sama kecuali format cetak):
+`examples/example.ts` and `examples/example.py` produce the following output (TypeScript; Python is identical except for print formatting):
 
 ```
 [Unit]
@@ -30,7 +30,7 @@ RestartSec=5
 WantedBy=multi-user.target
 ```
 
-Kode TypeScript:
+TypeScript code:
 
 ```ts
 import { render } from "lombokservice";
@@ -41,18 +41,18 @@ process.stdout.write(render("systemd", spec));
 
 ## 4. Recipes
 
-- Pemasang lintas OS: pilih target dari sistem operasi, tulis hasil render ke lokasi standar target.
-- Peninjauan: simpan hasil render di repo untuk melihat perubahan definisi layanan.
-- Tes: bandingkan hasil render dengan berkas emas.
+- Cross-OS installer: choose the target from the operating system and write the rendered text to the target's standard location.
+- Review: keep the rendered output in the repository to see changes in the service definition.
+- Tests: compare the rendered output with golden files.
 
 ## 5. Common pitfalls
 
-- Hanya empat target; SysV, FreeBSD rc.d, runit BELUM.
-- Hanya subset bidang umum; opsi lanjutan tidak ada.
-- Tidak diverifikasi dengan systemd-analyze, plutil, sc.exe atau procd sungguhan di sesi pembuatan (hanya vector).
-- Windows tidak mendukung env dan workingDir lewat sc.exe.
-- Port Rust, Go, PHP BELUM.
+- Only four targets; SysV, FreeBSD rc.d, runit: NOT YET.
+- Only a subset of common fields; no advanced options.
+- Not verified against real systemd-analyze, plutil, sc.exe or procd when created (vectors only).
+- Windows does not support env and workingDir through sc.exe.
+- Rust, Go and PHP ports: NOT YET.
 
-## 6. Lihat juga
+## 6. See also
 
 `SPEC_LombokService_v0.1.0.md`, `API_LombokService_v0.1.0.md`, `full_summary_project_LombokService_v0.1.0.md`.

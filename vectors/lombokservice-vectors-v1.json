@@ -586,7 +586,7 @@
    "target": "systemd",
    "spec": {
     "name": "unicode",
-    "description": "Layanan é中",
+    "description": "Service é中",
     "exec": [
      "/bin/x",
      "é😀"
@@ -595,14 +595,14 @@
      "U": "é"
     }
    },
-   "out": "[Unit]\nDescription=Layanan é中\n\n[Service]\nType=simple\nExecStart=/bin/x \"é😀\"\nEnvironment=\"U=é\"\nRestart=always\nRestartSec=5\n\n[Install]\nWantedBy=multi-user.target\n",
+   "out": "[Unit]\nDescription=Service é中\n\n[Service]\nType=simple\nExecStart=/bin/x \"é😀\"\nEnvironment=\"U=é\"\nRestart=always\nRestartSec=5\n\n[Install]\nWantedBy=multi-user.target\n",
    "error": false
   },
   {
    "target": "launchd",
    "spec": {
     "name": "unicode",
-    "description": "Layanan é中",
+    "description": "Service é中",
     "exec": [
      "/bin/x",
      "é😀"
@@ -618,7 +618,7 @@
    "target": "windows",
    "spec": {
     "name": "unicode",
-    "description": "Layanan é中",
+    "description": "Service é中",
     "exec": [
      "/bin/x",
      "é😀"
@@ -634,7 +634,7 @@
    "target": "openwrt",
    "spec": {
     "name": "unicode",
-    "description": "Layanan é中",
+    "description": "Service é中",
     "exec": [
      "/bin/x",
      "é😀"

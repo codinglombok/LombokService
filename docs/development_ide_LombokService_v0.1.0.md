@@ -1,28 +1,29 @@
-# Pengembangan LombokService
+# Development LombokService
 
 ## 1. Roadmap
 
-- 0.1.1: CI, coverage, fuzz, publish; verifikasi dengan alat target asli
-- 0.2.0: port Rust, Go, PHP; target FreeBSD rc.d dan SysV
-- 0.3.0: bidang lanjutan opsional (batas sumber daya, ketergantungan)
+- 0.1.1: CI, coverage, fuzz, publish; verification with the real target tools
+- 0.2.0: Rust, Go, PHP ports; FreeBSD rc.d and SysV targets
+- 0.3.0: optional advanced fields (resource limits, dependencies)
 
 ## 2. Deferred scope
 
-Memasang, memulai, atau memeriksa layanan; hak akses berkas; skrip SysV lama dan FreeBSD rc.d (BELUM); bidang lanjutan unit systemd (sandboxing, ketergantungan khusus).
+Installing, starting, or inspecting services; file permissions; legacy SysV scripts and FreeBSD rc.d (NOT YET); advanced systemd unit fields (sandboxing, custom dependencies).
 
-## 3. Prinsip desain untuk kontributor
+## 3. Design principles for contributors
 
-- Kontrak dulu: ubah SPEC dan vector sebelum kode; perbedaan antar-port adalah bug.
-- Tanpa dependensi runtime; tanpa jam, tanpa jaringan, tanpa acak tersembunyi.
-- Setiap fitur README memiliki kasus vector atau test.
-- Tidak ada nama klien atau aplikasi pemilik di berkas publik.
-- Tanpa emoji di `*.md`.
+- Contract first: change the SPEC and vectors before the code; differences between ports are bugs.
+- No runtime dependencies; no clock, no network, no hidden randomness.
+- Every README feature has a vector case or a test.
+- No client or owning-application names in public files.
+- No emoji in `*.md`.
+- Documentation, comments, error messages and examples are written in English (the default language of all Lombok Ecosystem repositories).
 
-## 4. Cara berkontribusi
+## 4. How to contribute
 
-Fork, cabang `feat/...`, jalankan kedua runner vector, perbarui `API_` dan `SPEC_` bila perilaku berubah, buka PR. Bangkitkan ulang vector dengan `node scripts/gen_vectors.ts` hanya bila kontrak berubah, dan tinjau diff vector.
+Fork, create a `feat/...` branch, run both vector runners, update `API_` and `SPEC_` if behavior changes, and open a PR. Regenerate vectors with `node scripts/gen_vectors.ts` only when the contract changes, and review the vector diff.
 
-## 5. Pertanyaan terbuka
+## 5. Open questions
 
-- Apakah dukungan env pada Windows perlu dibuat lewat registri layanan?
-- Perlu versi target (misal systemd minimum) sebagai parameter?
+- Should env support on Windows be implemented through the service registry?
+- Is a target version (for example a minimum systemd version) needed as a parameter?

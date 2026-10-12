@@ -2,72 +2,72 @@
 
 Render service definitions for systemd, launchd, Windows (sc.exe) and OpenWrt procd from one specification, with exact quoting and escaping per target. Part of the Lombok Ecosystem.
 
-## Mengapa library ini?
+## Why this library?
 
-Memasang program sebagai layanan berarti menulis berkas berbeda untuk tiap sistem dengan aturan kutip dan escape yang berbeda dan mudah salah. Library ini menerima satu spesifikasi dan menghasilkan teks yang tepat untuk tiap target, menolak kombinasi yang tidak didukung alih-alih diam-diam mengabaikannya.
+Installing a program as a service means writing a different file for each system, with different and easy-to-get-wrong quoting and escaping rules. This library takes one specification and produces the exact text for each target, rejecting unsupported combinations instead of silently ignoring them.
 
-## Fitur
+## Features
 
-- Empat target: systemd, launchd, Windows sc.exe, OpenWrt procd
-- Aturan kutip per target (systemd, argv Windows, shell POSIX, XML)
-- Validasi ketat spesifikasi; kombinasi tak didukung ditolak
-- Keluaran deterministik (variabel lingkungan terurut)
+- Four targets: systemd, launchd, Windows sc.exe, OpenWrt procd
+- Per-target quoting rules (systemd, Windows argv, POSIX shell, XML)
+- Strict validation of the specification; unsupported combinations are rejected
+- Deterministic output (environment variables sorted)
 
-## Skenario pemakaian
+## Use cases
 
-- Pemasang (installer) yang membuat definisi layanan untuk sistem operasi pengguna
-- Alat penyebaran/konfigurasi yang menghasilkan unit untuk banyak server
-- Firmware router atau gateway yang perlu skrip init
-- Pengujian: memastikan definisi layanan tidak berubah antar versi
+- An installer that creates a service definition for the user's operating system
+- A deployment or configuration tool that generates units for many servers
+- Router or gateway firmware that needs init scripts
+- Testing: making sure service definitions do not change between versions
 
-## Instalasi
+## Installation
 
-Belum terbit di registry (0.1.0 belum dirilis). Setelah rilis:
+Not yet published to any registry (0.1.0 has not been released). After release:
 
 ```
 npm install lombokservice
 pip install lombokservice
 ```
 
-## API ringkas
+## API overview
 
 - `render(target, spec) -> string; target: systemd | launchd | windows | openwrt`
 - `spec: name, description?, exec[], workingDir?, user?, env?, restart? (always | on-failure | never), restartDelaySec?, network?`
 
-Rincian: `docs/API_LombokService_v0.1.0.md`.
+Details: `docs/API_LombokService_v0.1.0.md`.
 
-## Status port
+## Port status
 
 | Port | Status |
 |---|---|
-| TypeScript (referensi) | YA, lulus seluruh 165 kasus vector |
-| Python | YA, lulus seluruh 165 kasus vector |
-| Rust, Go, PHP | BELUM |
+| TypeScript (reference) | YES, passes all 165 vector cases |
+| Python | YES, passes all 165 vector cases |
+| Rust, Go, PHP | NOT YET |
 
-## Standar yang diimplementasikan
+## Standards implemented
 
-Kontrak normatif ada di `docs/SPEC_LombokService_v0.1.0.md`; vector di `vectors/lombokservice-vectors-v1.json`.
+The normative contract is in `docs/SPEC_LombokService_v0.1.0.md`; the vectors are in `vectors/lombokservice-vectors-v1.json`.
 
-## Batasan yang diketahui
+## Known limitations
 
-- Hanya empat target; SysV, FreeBSD rc.d, runit BELUM.
-- Hanya subset bidang umum; opsi lanjutan tidak ada.
-- Tidak diverifikasi dengan systemd-analyze, plutil, sc.exe atau procd sungguhan di sesi pembuatan (hanya vector).
-- Windows tidak mendukung env dan workingDir lewat sc.exe.
-- Port Rust, Go, PHP BELUM.
+- Only four targets; SysV, FreeBSD rc.d, runit: NOT YET.
+- Only a subset of common fields; no advanced options.
+- Not verified against real systemd-analyze, plutil, sc.exe or procd when created (vectors only).
+- Windows does not support env and workingDir through sc.exe.
+- Rust, Go and PHP ports: NOT YET.
 
-## Pengembangan
+## Development
 
 ```
-node --test typescript/test/          # TypeScript (Node 22+)
-python -m pytest python/tests         # Python 3.10+
-node scripts/gen_vectors.ts           # membangkitkan ulang vector dari referensi TypeScript
+node --test typescript/test/vectors.test.ts   # TypeScript (Node 22+)
+python -m pytest python/tests                 # Python 3.10+
+node scripts/gen_vectors.ts                   # regenerate vectors from the TypeScript reference
 ```
 
-## Ekosistem Lombok
+## Lombok Ecosystem
 
 Part of the [Lombok Ecosystem](https://github.com/codinglombok).
 
-## Lisensi
+## License
 
-Apache-2.0 OR MIT (lihat `LICENSE-APACHE` dan `LICENSE-MIT`).
+Apache-2.0 OR MIT (see `LICENSE-APACHE` and `LICENSE-MIT`).
