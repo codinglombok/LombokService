@@ -7,6 +7,8 @@ name = "lombokservice"
 version = "0.1.0"
 description = "Render service definitions for systemd, launchd, Windows (sc.exe) and OpenWrt procd from one specification, with exact quoting and escaping per target. Part of the Lombok Ecosystem."
 license = "Apache-2.0 OR MIT"
+readme = "README.md"
+license-files = ["LICENSE-APACHE", "LICENSE-MIT"]
 requires-python = ">=3.10"
 dependencies = []
 
